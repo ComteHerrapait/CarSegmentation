@@ -1,0 +1,9 @@
+10
+10
+rouge 2 
+jaune 3 
+bleu 2 
+blanc 1 
+vert 1 
+gris 1 
+orange 1 

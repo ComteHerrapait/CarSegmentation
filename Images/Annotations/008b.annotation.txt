@@ -1,0 +1,9 @@
+19
+19
+noir 2 
+gris 4 
+rouge 3 
+vert 5 
+violet 2 
+bleu 1 
+orange 2 

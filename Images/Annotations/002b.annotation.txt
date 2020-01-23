@@ -1,0 +1,5 @@
+4
+4
+blanc 2 
+noir 1 
+jaune 1 

@@ -1,0 +1,5 @@
+4
+3
+jaune 1 
+bleu 1 
+rouge 2 

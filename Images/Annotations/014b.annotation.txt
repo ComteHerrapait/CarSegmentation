@@ -1,0 +1,7 @@
+16
+12
+jaune 2 
+rouge 3 
+bleu 3 
+blanc 3 
+gris 5 

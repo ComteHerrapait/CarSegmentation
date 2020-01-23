@@ -1,0 +1,6 @@
+9
+9
+rouge 5 
+orange 1 
+blanc 2 
+noir 1 

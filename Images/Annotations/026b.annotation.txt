@@ -1,0 +1,8 @@
+16
+16
+orange 1 
+rouge 1 
+bleu 1 
+blanc 3 
+noir 2 
+gris 8 

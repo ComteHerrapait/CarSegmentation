@@ -1,0 +1,6 @@
+7
+7
+noir 2 
+blanc 3 
+rouge 1 
+jaune 1 

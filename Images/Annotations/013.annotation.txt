@@ -1,0 +1,9 @@
+18
+blanc
+5 gris 
+4 bleu 
+3 noir 
+3 rouge 
+1 jaune 
+1 orange 
+1  

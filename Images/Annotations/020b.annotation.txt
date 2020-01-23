@@ -1,0 +1,6 @@
+27
+16
+noir  7 
+rouge 4 
+blanc 6 
+gris 10 

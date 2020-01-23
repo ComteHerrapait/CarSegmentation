@@ -1,0 +1,7 @@
+20
+20
+rouge 2 
+violet 1 
+or 1 
+bleu 6 
+gris 10 

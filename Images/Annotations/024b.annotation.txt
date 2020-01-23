@@ -1,0 +1,7 @@
+7
+7
+blanc 1 
+gris 2 
+noir 1 
+bleu 2 
+rouge 1 

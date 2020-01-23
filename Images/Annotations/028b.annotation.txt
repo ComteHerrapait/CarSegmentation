@@ -1,0 +1,6 @@
+39
+36
+vert 4 
+rouge 2 
+blanc 6 
+bleu 24 
