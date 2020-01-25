@@ -83,7 +83,7 @@ axes(handles.canvas);
 axis off;
 if ~isempty(name) && str2double(name)>= 0 && str2double(name)<= 30
     %if name is valid
-    path = 'base image/';%chemin vers l'image
+    path = 'Images/';%chemin vers l'image
     path = strcat( path, name);%on y ajoute le nom de l'image
     %si on coche le bouton de bruit on rajoute b au nom
     if get(handles.boolNoise, 'Value')
@@ -92,7 +92,7 @@ if ~isempty(name) && str2double(name)>= 0 && str2double(name)<= 30
     %% mise en forme
     image = imread(strcat( path , '.jpg'));%on ouvre l'image selectionnée
     imshow(image);%on affiche l'image selectionnée
-    file = fopen(strcat('base image/Annotations/',name,'.annotation.txt'),'r');
+    file = fopen(strcat('Images/Annotations/',name,'.annotation.txt'),'r');
     text = textscan(file,'%s', 'Delimiter', '');
     set(handles.listBefore, 'String', text{1,1});
     showStep = get(handles.boolSteps, 'Value');

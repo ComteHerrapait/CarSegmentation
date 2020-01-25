@@ -1,5 +1,5 @@
 %% Chargement de l'image
-Img = imread('base image\006.jpg');
+Img = imread('Images\006.jpg');
 figure();
 
 %% Pre-traitement
@@ -9,4 +9,4 @@ ImgPreTrait = PreTraitement(Img, 1);
 ImgTraitement = Traitement(ImgPreTrait, 1);
 
 %% Post-traitement
-PostTraitement(ImgTraitement, Img);
+PostTraitement(ImgTraitement, Img, 1)
