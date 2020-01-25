@@ -1,0 +1,12 @@
+Img = imread('base image\006.jpg');
+Img = rgb2gray(Img);
+Img2 = edge(Img,'Roberts');
+ImgReconstr = imreconstruct(Marqueur, ImgPreTrait);
+%Img21 = PreTraitement(Img, 0);
+%Img22 = PreTraitement(Img2, 0);
+figure();
+%subplot(121); imshow(Img, []);
+subplot(111); imshow(Img2, []);
+zero = find(Img2==0);
+Img(zero) = 0;
+%subplot(133); imshow(Img, []);
