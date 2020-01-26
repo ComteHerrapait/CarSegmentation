@@ -1,7 +1,7 @@
 function [nCarsDetected] = PostTraitement( ImgTraitement, ImgInit , showSteps)
 % * Fonction de post-traitement
 % * Prend en argument l'image initiale et l'image renvoyee par le traitement
-if nargin < 2
+if nargin < 3
     showSteps =   true;
 end
 

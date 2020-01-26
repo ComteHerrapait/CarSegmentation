@@ -24,6 +24,6 @@ for i=1:30
         
         fclose(file);
     end
-    nValid
-    nTested
+
 end
+successRate = nValid / nTested
