@@ -4,8 +4,8 @@ function [ ImgFin ] = Traitement( ImgPreTrait, showSteps )
 % * image ne contenant que les voitures
 
 Marqueur = ImgPreTrait; % Marqueurs
-s = strel('disk', 1); % Element structurant
-for k=1:6 % Parametre k a preciser   
+s = strel('rectangle', [9,11]); % Element structurant
+for k=1:1 % Parametre k a preciser   
     Marqueur = imerode(Marqueur, s); % Erosion successive pour ne garder que les marqueurs des voitures
 end
 ImgReconstr = imreconstruct(Marqueur, ImgPreTrait); % Image reconstruite a partir des marqueurs (voitures)
