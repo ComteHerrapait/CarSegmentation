@@ -63,3 +63,34 @@ end
 
 %% Affichage
 figure(); imshow(Img, []); title(sprintf('Il y a %.0f voitures', length(Contours)));
+
+%% Gradient
+Marqueur = edge(Img,'Roberts');
+ImgAReconstruct = edge(Img,'ZeroCross');
+ImgReconstr = bwdistgeodesic(Marqueur, ImgAReconstruct);
+figure(); imshow(Marqueur, []);
+figure(); imshow(ImgAReconstruct, []);
+
+%% stdfilt
+s = strel('disk', 105);
+J = stdfilt(ImgGray);
+figure(); imshow(ImgGray);
+figure(); imshow(J);
+
+%% Imextendmax/min
+%imextendedmin
+MaxEtendus = imhmin(ImgGray, 60);
+ImgGrad = edge(MaxEtendus,'Canny');
+figure(); imshow(Img, []);
+figure(); imshow(ImgGray, []);
+figure(); imshow(MaxEtendus, []);
+figure(); imshow(ImgGrad, []);
+%% Classification
+ImgGrayMoy = imfilter(ImgGray,fspecial('average',9),'symmetric');
+ImgGrayStd = stdfilt(ImgGray, ones(5));
+figure(); imshow(ImgGray, []);
+figure(); imshow(ImgGrayStd,[]);
+sel=ceil(numel(ImgGray)*rand(1000,1));
+figure(9),plot(ImgGrayMoy(sel),ImgGrayStd(sel),'.r');
+title('Nuages de points');
+xlabel('Moyenne'); ylabel('Ecart type');
