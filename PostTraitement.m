@@ -1,6 +1,9 @@
 function [nCarsDetected] = PostTraitement( ImgTraitement, ImgInit , showSteps)
 % * Fonction de post-traitement
 % * Prend en argument l'image initiale et l'image renvoyee par le traitement
+if nargin < 2
+    showSteps =   true;
+end
 
 Contours = regionprops(ImgTraitement, 'BoundingBox'); % Contours des objets de l'image
 if showSteps
