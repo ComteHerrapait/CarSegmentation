@@ -22,14 +22,14 @@ for i=1:30
         nCarsTheoricMin = str2num(line);	%conversion en nombre
         line = fgetl(file);                 %premiere ligne du texte d'annotations
         nCarsTheoricMax = str2num(line);    %conversion en nombre
-    
+        tic;
         %%Traitement de l'image
         ImgPreTrait = PreTraitement(image, 0);
         ImgTraitement = Traitement(ImgPreTrait, 0);
         nCarsDetected = PostTraitement(ImgTraitement, image, 0);
         
         %%Affichage en cours de traitement
-        fprintf('num = %.0f \tmin = %.0f \tmax = %.0f \ttrouvées = %.0f\n',i, nCarsTheoricMin, nCarsTheoricMax, nCarsDetected)
+        fprintf('%s.jpg  [%02.0f : %02.0f]\t %02.0f voitures trouvées (%.3fs)\n', name, nCarsTheoricMin, nCarsTheoricMax, nCarsDetected,toc)
         
         %%teste si les valeurs sont correctes et si les valeurs du fichier
         %%d'annotation existent
