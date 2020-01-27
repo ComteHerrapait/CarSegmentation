@@ -1,0 +1,8 @@
+nombre de voitures visibles
+nombre de voitures entièrement visibles
+couleur1 nombre
+couleur2 nombre
+	.
+	.
+	.
+couleurN nombre

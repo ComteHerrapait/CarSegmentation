@@ -1,0 +1,7 @@
+38
+24
+blanc 12
+gris 12
+noir 6
+vert 3
+rouge 3
