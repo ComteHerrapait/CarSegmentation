@@ -14,7 +14,7 @@ s = strel('disk', 4);
 ImgFin = imclose(ImgReconstr, s);
 
 if showSteps == 1
-    a = 0.5;
+    a = 1;
     imshow(ImgFin, []);
     pause(a);
 end

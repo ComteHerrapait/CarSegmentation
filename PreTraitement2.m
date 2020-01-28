@@ -2,32 +2,31 @@ function [ ImgBin ] = PreTraitement2( Istart, showSteps )
 % * Fonction de pre-traitement de l'image
 % * Prend une mage uint8 en entrée et renvoie une image binarise
 
-%%
-% stdfilt(I) => donne une image en ecart type
-%
-%
-%%
+%% binarization
+IGray = rgb2gray(Istart);
+ICartoon = cartoon(IGray);
+IBinary = ICartoon<0.10;
+IBinary = bwareaopen(IBinary,10);%%removes small shapes
 
-ImgGray = rgb2gray(Istart); % Image uint8 => Image niveau de gris
+%% Rough shape of cars
+IEdge = edge(ICartoon,'canny');
+IFill = imdilate(IEdge,strel('disk',3));
+IFill = imfill(IFill, 'holes');
 
-ImgCartoon = cartoon(ImgGray); % Cartoonisation de l'image
+ImgBin = IFill;
 
-ImgAdapt = adapthisteq(ImgCartoon); % ???
-
-ImgBin = imbinarize(ImgAdapt,'adaptive'); % Image cartoonise => Image binaire
-
-s = strel('disk', 4);
-ImgFin = imopen(ImgBin, s);
-
+%% 
 if showSteps == 1 % si showSteps == 1, on affiche les différentes étapes
     a = 2;
-    imshow(ImgGray, []);
+    imshow(IGray, []);title('niveaux de gris');
     pause(a);
-    imshow(ImgAdapt, []);
+    imshow(ICartoon, []);title('cartoonisation');
     pause(a);
-    imshow(ImgBin, []);
+    imshow(IBinary, []);title('binarisation');
     pause(a);
-    imshow(ImgFin, []);
+    imshow(IEdge, []);title('bordures');
+    pause(a);
+    imshow(IFill, []);title('remplissage');
     pause(a);
 end
 
