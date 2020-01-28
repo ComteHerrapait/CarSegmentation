@@ -1,5 +1,5 @@
 %% Chargement de l'image
-Img = imread('Images\007.jpg');
+Img = imread('Images\001.jpg');
 figure();
 
 %% Pre-traitement
