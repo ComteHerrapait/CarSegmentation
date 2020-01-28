@@ -43,4 +43,4 @@ for i=1:30
 end
 
 %% Affichage du résultat
-fprintf('\n\nTaux de réussite au traitement : %.1f %%\n\n',100 * nValid / nTested);
+fprintf('\nTaux de réussite au traitement : %.1f %%\n %.0f bien traitées \n\n',100 * nValid / nTested, nValid);
