@@ -97,7 +97,7 @@ if ~isempty(name) && str2double(name)>= 0 && str2double(name)<= 30
     set(handles.listBefore, 'String', text{1,1});
     showStep = get(handles.boolSteps, 'Value');
     %% Traitement
-    ImgPreTrait = PreTraitement(image, showStep);
+    ImgPreTrait = PreTraitement2(image, showStep);
     ImgTraitement = Traitement(ImgPreTrait, showStep);
     PostTraitement(ImgTraitement, image);
     
