@@ -1,48 +1,48 @@
-%% Chargement de l'image
+%% Init
 clear all, clc, close all;
-Img = imread('Images\001.jpg');
-ImgGray = rgb2gray(Img);
-ImgGray2 = ImgGray<50;
-ImgGray2 = bwareaopen(ImgGray2,10);
-ImgGrad = edge(ImgGray,'canny');
-ImgGrad2 = imfill(ImgGrad, 'holes');
-ImgGrad3 = imreconstruct(ImgGray2, ImgGrad);
-ImgGrad3 = imclose(ImgGrad3, strel('disk', 2));
-ImgGrad3 = imfill(ImgGrad3, 'holes');
-ImgGrad3 = imopen(ImgGrad3, strel('disk', 1));
-figure(); imshow(ImgGray2, []);
-figure(); imshow(ImgGrad, []);
-figure(); imshow(ImgGrad2, []);
-figure(); imshow(ImgGrad3, []);
+Img = imread('Images\011.jpg');
+%% binarization
+IGray = rgb2gray(Img);
+ICartoon = cartoon(IGray);
+moy = mean(ICartoon(:));
+IBinary = ICartoon<0.10;
+IBinary = bwareaopen(IBinary,10);%%removes small shapes
 
+%% Rough shape of cars
+IEdge = edge(ICartoon,'canny');
+IFill = imdilate(IEdge,strel('disk',3));
+IFill = imfill(IFill, 'holes');
+IReconstruct = imreconstruct(IBinary, IEdge);
 
+%% Adaptative closing
+orientations = regionprops(IReconstruct, 'Orientation');
+axisLength = regionprops(IReconstruct, 'MajorAxisLength');
 
+deg = median([orientations.Orientation]);
+len = median([axisLength.MajorAxisLength]);
 
-
-
-
-
-
-
-
+IReconstruct2 = imclose(IReconstruct, strel('line',len/6,deg));
 
 %%
-ImgGrayStd = stdfilt(ImgGray, ones(5));
-figure(); imshow(ImgGray<50, []);
-moy = mean(ImgGrayStd(:))
-figure(); imshow(ImgGrayStd>19,[]);
-ImgFill = imfill(ImgGrayStd>5, 'hole');
-figure(); imshow(ImgFill,[]);
-imgFill2 = imerode(ImgFill, strel('disk', 5));
-Longueur = regionprops(imgFill2, 'MajorAxisLength');
-Largeur = regionprops(imgFill2, 'MinorAxisLength');
-figure(); imshow(imgFill2,[]);
-nbVoiture = 0;
-for k = 1:length(Longueur)
-    longueur = Longueur(k).MajorAxisLength;
-    largeur = Largeur(k).MinorAxisLength;
-    if (longueur>largeur*2 && longueur<largeur*3 && longueur>10)
-        nbVoiture = nbVoiture + 1;
+IReconstruct3 = imclose(IReconstruct2, strel('disk',fix(len/15) )); %rapproche
+IReconstruct3 = imfill(IReconstruct3, 'holes');
+IReconstruct3 = imopen(IReconstruct3, strel('disk', fix(len/30) )); %sépare
+
+%%
+Longueur = regionprops(IFill, 'MajorAxisLength');
+med = median([Longueur.MajorAxisLength]);
+nbVoit = 0;
+for k=1:length(Longueur)
+    if (Longueur(k).MajorAxisLength < med*1.5)
+        nbVoit = nbVoit + 1;
     end
 end
-    
+
+
+%% affichage
+figure(1); imshow(IBinary, []);title('image binaire')
+figure(2); imshow(IEdge, []);title('image bordures')
+figure(3); imshow(IFill, []);title('image remplie')
+figure(4); imshow(IReconstruct, []);title('image reconstruite')
+figure(5); imshow(IReconstruct2, []);title('image fermeture adaptative')
+figure(6); imshow(IReconstruct3, []);title('image finale') 
