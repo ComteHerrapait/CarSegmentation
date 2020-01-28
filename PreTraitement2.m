@@ -7,15 +7,14 @@ function [ ImgBin ] = PreTraitement2( Istart, showSteps )
 %
 %
 %%
+
 ImgGray = rgb2gray(Istart); % Image uint8 => Image niveau de gris
 
 ImgCartoon = cartoon(ImgGray); % Cartoonisation de l'image
 
 ImgAdapt = adapthisteq(ImgCartoon); % ???
 
-ImgThresh = adaptthresh(ImgAdapt); % Calcul d'un seuil adaptatif
-
-ImgBin = imbinarize(ImgAdapt, ImgThresh); % Image cartoonise => Image binaire
+ImgBin = imbinarize(ImgAdapt,'adaptive'); % Image cartoonise => Image binaire
 
 s = strel('disk', 4);
 ImgFin = imopen(ImgBin, s);
