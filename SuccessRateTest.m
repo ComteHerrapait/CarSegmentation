@@ -25,12 +25,12 @@ for b = [" ",'b']
 
             %%Lecture des annotations
             line = fgetl(file);                 %deuxième ligne du texte d'annotations
-            nCarsTheoricMin = str2num(line);	%conversion en nombre
+            nCarsTheoricMax = str2num(line);	%conversion en nombre
             line = fgetl(file);                 %premiere ligne du texte d'annotations
-            nCarsTheoricMax = str2num(line);    %conversion en nombre
+            nCarsTheoricMin = str2num(line);    %conversion en nombre
             tic;
             %%Traitement de l'image
-            nCarsDetected = PreTraitement2(image, 0);
+            [ImgPre, nCarsDetected] = PreTraitement2(image, 0);
 
            
             %%teste si les valeurs sont correctes et si les valeurs du fichier
@@ -39,7 +39,13 @@ for b = [" ",'b']
                 valid = 'VALID';
                 nValid = nValid + 1;
             else
-                valid = '-----';
+                nCarsDetected = Traitement2(ImgPre);
+                if ~isempty(nCarsTheoricMin) && ~isempty(nCarsTheoricMax) && (nCarsDetected >= nCarsTheoricMin) && (nCarsDetected <= nCarsTheoricMax)
+                    valid = 'VALID';
+                    nValid = nValid + 1;
+                else
+                    valid = '-----';
+                end
             end
             
             %%Affichage en cours de traitement

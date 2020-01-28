@@ -1,4 +1,4 @@
-function [ ImgBin ] = PreTraitement2( Istart, showSteps )
+function [ ImgBin, nbVoit ] = PreTraitement2( Istart, showSteps )
 % * Fonction de pre-traitement de l'image
 % * Prend une mage uint8 en entrée et renvoie une image binarise
 
@@ -12,8 +12,8 @@ IBinary = bwareaopen(IBinary,10);%%removes small shapes
 IEdge = edge(ICartoon,'canny');
 IFill = imdilate(IEdge,strel('disk',3));
 IFill = imfill(IFill, 'holes');
-
-%ImgBin = IFill;
+IReconstruct = imreconstruct(IBinary, IEdge);
+ImgBin = IReconstruct;
 
 Longueur = regionprops(IFill, 'MajorAxisLength');
 med = median([Longueur.MajorAxisLength]);
@@ -24,7 +24,7 @@ for k=1:length(Longueur)
     end
 end
 
-ImgBin = nbVoit;
+nbVoit = nbVoit;
 %% 
 if showSteps == 1 % si showSteps == 1, on affiche les différentes étapes
     a = 2;

@@ -1,6 +1,6 @@
 %% Init 
 clear all, clc, close all;
-Img = imread('Images\010.jpg');
+Img = imread('Images\009.jpg');
 %% binarization
 IGray = rgb2gray(Img);
 ICartoon = cartoon(IGray);
@@ -35,6 +35,17 @@ nbVoit = 0;
 for k=1:length(Longueur)
     if (Longueur(k).MajorAxisLength < med*1.5)
         nbVoit = nbVoit + 1;
+    end
+end
+
+longueur = regionprops(IReconstruct3, 'MajorAxisLength');
+largeur = regionprops(IReconstruct3, 'MinorAxisLength');
+nbVoit2 = 0;
+for k=1:length(longueur)
+    long = longueur(k).MajorAxisLength;
+    larg = largeur(k).MinorAxisLength;
+    if (long>larg*1.2 && long<larg*3.5 && long > 100)
+        nbVoit2 = nbVoit2 + 1;
     end
 end
 
