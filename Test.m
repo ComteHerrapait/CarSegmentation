@@ -1,17 +1,17 @@
 %% Init
 clear all, clc, close all;
-Img = imread('Images\001.jpg');
+Img = imread('Images\007.jpg');
 %% binarization
 IGray = rgb2gray(Img);
 ICartoon = cartoon(IGray);
-IBinary = ICartoon<50;
-IBinary = bwareaopen(IBinary,10);%%removes small shapes
+IBinary = ICartoon<0.10;
+IBinary = bwareaopen(IBinary,50);%%removes small shapes
 
 %% Rough shape of cars
 IEdge = edge(ICartoon,'canny');
 IFill = imdilate(IEdge,strel('disk',3));
 IFill = imfill(IFill, 'holes');
-IReconstruct = imreconstruct(IBinary, IEdge);
+IReconstruct = imreconstruct(IFill, IEdge);
 
 %% Adaptative closing
 
@@ -36,3 +36,8 @@ figure(3); imshow(IFill, []);title('image remplie')
 figure(4); imshow(IReconstruct, []);title('image reconstruite')
 figure(5); imshow(IReconstruct2, []);title('image fermeture adaptative')
 figure(6); imshow(IReconstruct3, []);title('image finale')
+
+%% TODO
+% tri de taille
+% raccrocher ou supprimer les petites queues sur l'images finale
+% rendre le seuil de départ plus intelligent
