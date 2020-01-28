@@ -13,8 +13,18 @@ IEdge = edge(ICartoon,'canny');
 IFill = imdilate(IEdge,strel('disk',3));
 IFill = imfill(IFill, 'holes');
 
-ImgBin = IFill;
+%ImgBin = IFill;
 
+Longueur = regionprops(IFill, 'MajorAxisLength');
+med = median([Longueur.MajorAxisLength]);
+nbVoit = 0;
+for k=1:length(Longueur)
+    if (Longueur(k).MajorAxisLength < med*1.5)
+        nbVoit = nbVoit + 1;
+    end
+end
+
+ImgBin = nbVoit;
 %% 
 if showSteps == 1 % si showSteps == 1, on affiche les différentes étapes
     a = 2;

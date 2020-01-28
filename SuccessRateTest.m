@@ -30,9 +30,7 @@ for b = [" ",'b']
             nCarsTheoricMax = str2num(line);    %conversion en nombre
             tic;
             %%Traitement de l'image
-            ImgPreTrait = PreTraitement2(image, 1);
-            ImgTraitement = Traitement(ImgPreTrait, 0);
-            nCarsDetected = PostTraitement(ImgTraitement, image, 0);
+            nCarsDetected = PreTraitement2(image, 0);
 
            
             %%teste si les valeurs sont correctes et si les valeurs du fichier
