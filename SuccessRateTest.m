@@ -1,4 +1,4 @@
-%% Program to test the success rate of the current algorithm
+%% Program to test the success rate of the current algorithm on all images
 
 %%  Initialisation
 nTested = 0;

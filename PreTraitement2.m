@@ -1,26 +1,28 @@
 function [ ImgBin, nbVoit, contoursVoit, IFill] = PreTraitement2( Istart, showSteps )
 % * Fonction de pre-traitement de l'image
-% * Prend une image uint8 en entrée et renvoie une image binarise
 % * Peut permettre de trouver le nombre de voiture
+% ImgBin - > image binaire des voitures
+% nbVoit - > nombre de voitures trouvées par cette méthode
+% contoursVoit - > Bounding Boxes des voitures trouvées par cette méthode
+% IFill -> version remplie de l'image binaire, pour l'affichage 
 
 %% binarization
 IGray = rgb2gray(Istart);
-%IGray = medfilt2(IGray);
 ICartoon = cartoon(IGray);
 IBinary = ICartoon<0.10;
-IBinary = bwareaopen(IBinary,10);%%removes small shapes
+IBinary = bwareaopen(IBinary,10);%removes small shapes
 
 %% Rough shape of cars
-IEdge = edge(ICartoon,'canny');
-IFill = imdilate(IEdge,strel('disk',3));
-IFill = imfill(IFill, 'holes');
-IReconstruct = imreconstruct(IBinary, IEdge);
-ImgBin = IReconstruct;
+IEdge = edge(ICartoon,'canny');                 %detection de contours
+IFill = imdilate(IEdge,strel('disk',3));        %dilatation pour rassembler les contours
+IFill = imfill(IFill, 'holes');                 %remplissage des formes
+IReconstruct = imreconstruct(IBinary, IEdge);   %recontruction géodésique
+ImgBin = IReconstruct;                          %image finale
 
-Longueur = regionprops(IFill, 'MajorAxisLength');
-med = median([Longueur.MajorAxisLength]);
+Longueur = regionprops(IFill, 'MajorAxisLength');%trouve la taille du grand axes des blobs
+med = median([Longueur.MajorAxisLength]);%puis en calcule la médiane
 
-Contours = regionprops(IFill, 'BoundingBox'); % Contours des objets de l'image
+Contours = regionprops(IFill, 'BoundingBox'); 
 nbVoit = 0;
 contoursVoit = [];
 for k=1:length(Longueur)

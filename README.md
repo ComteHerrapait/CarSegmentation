@@ -1,2 +1,2 @@
 # CarSegmentation
- Projet d'analyse d'image avec Arthur Boiron
+Projet d'analyse d'image par Arthur Boiron & Léon Delcroix

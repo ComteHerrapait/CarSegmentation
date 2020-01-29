@@ -1,11 +1,4 @@
-%% Test d'une image
-numImg = '024';
-
-% Chaine de traitement
-valid = ChaineDeTraitement(numImg);
-    
-    
-%% Test des 60 images
+ %% Test des 60 images
 nbValid = 0;
 for k=1:60
     if k<10
@@ -18,7 +11,7 @@ for k=1:60
         numImg = strcat('0',int2str(k-30),'b');
     end
 
-    valid = ChaineDeTraitement(numImg);
+    valid = ChaineDeTraitement(numImg, 0);
     nbValid = nbValid + valid;
 end
 %% Affichage du résultat

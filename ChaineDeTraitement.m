@@ -23,9 +23,6 @@ if (file ~= -1)&&(~isempty(image))
         validation = 1;
     end
     
-    %%Affichage en cours de traitement
-    %fprintf('%s%s [%02.0f : %02.0f]\t%02.0f voitures %s(%.2fs)\n', numImg, " ", nCarsTheoricMax, nCarsTheoricMin, nCarsDetected, valid, toc);
-    
     %%Fermeture du fichier
     fclose(file);
 end
