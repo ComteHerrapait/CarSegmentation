@@ -56,4 +56,8 @@ figure(2); imshow(IEdge, []);title('image bordures')
 figure(3); imshow(IFill, []);title('image remplie')
 figure(4); imshow(IReconstruct, []);title('image reconstruite')
 figure(5); imshow(IReconstruct2, []);title('image fermeture adaptative')
-figure(6); imshow(IReconstruct3, []);title('image finale') 
+figure(6); imshow(IReconstruct3, []);title('image finale') 1
+
+
+%%
+&& (nCarsDetected >= nCarsTheoricMin)

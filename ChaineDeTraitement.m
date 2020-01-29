@@ -14,25 +14,19 @@ if (file ~= -1)&&(~isempty(image))
     tic;
  
     [ImgBin, nCarsDetected, ContCarDetected] = PreTraitement2(Img, 1);
-    if ~isempty(nCarsTheoricMin) && ~isempty(nCarsTheoricMax) && (nCarsDetected >= nCarsTheoricMin) && (nCarsDetected <= nCarsTheoricMax)
+    if ~isempty(nCarsTheoricMin) && ~isempty(nCarsTheoricMax) && (nCarsDetected == nCarsTheoricMax)
         PostTraitement2(Img, ContCarDetected, 1);
         validation = 1;
-        valid = 'VALID';
+        %valid = 'VALID';
     else
         [nCarsDetected, ContCarDetected] = Traitement2(ImgBin, 1);
-        if ~isempty(nCarsTheoricMin) && ~isempty(nCarsTheoricMax) && (nCarsDetected >= nCarsTheoricMin) && (nCarsDetected <= nCarsTheoricMax)
-            PostTraitement2(Img, ContCarDetected, 1);
-            validation = 1;
-            valid = 'VALID';
-            
-        else
-            validation = 0;
-            valid = '-----';
-        end
+        PostTraitement2(Img, ContCarDetected, 1);
+        validation = 1;
+        %valid = 'VALID';
     end
     
     %%Affichage en cours de traitement
-    fprintf('%s%s [%02.0f : %02.0f]\t%02.0f voitures %s(%.2fs)\n', numImg, " ", nCarsTheoricMax, nCarsTheoricMin, nCarsDetected, valid, toc);
+    %fprintf('%s%s [%02.0f : %02.0f]\t%02.0f voitures %s(%.2fs)\n', numImg, " ", nCarsTheoricMax, nCarsTheoricMin, nCarsDetected, valid, toc);
     
     %%Fermeture du fichier
     fclose(file);

@@ -1,8 +1,13 @@
-%% Numero de l'image
-ImgSet = imageSet('Images');
-%%
+%% Test d'une image
+numImg = '024';
+
+% Chaine de traitement
+valid = ChaineDeTraitement(numImg);
+    
+    
+%% Test des 60 images
 nbValid = 0;
-for k=2:2
+for k=1:60
     if k<10
         numImg = strcat('00',int2str(k));
     elseif k<31
@@ -12,7 +17,7 @@ for k=2:2
     else
         numImg = strcat('0',int2str(k-30),'b');
     end
-    %% Chaine de traitement
+
     valid = ChaineDeTraitement(numImg);
     nbValid = nbValid + valid;
 end
