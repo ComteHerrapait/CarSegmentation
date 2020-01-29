@@ -1,4 +1,4 @@
-function [validation] = ChaineDeTraitement( numImg )
+function [validation, nCarsDetected] = ChaineDeTraitement( numImg , showSteps)
 % Chaîne de traitement prenant en argument une image initiale 8int et qui
 % renvoie le nombre de voitures présente sur cette image
 
@@ -13,16 +13,14 @@ if (file ~= -1)&&(~isempty(image))
     nCarsTheoricMin = str2num(line);    %conversion en nombre
     tic;
  
-    [ImgBin, nCarsDetected, ContCarDetected] = PreTraitement2(Img, 1);
+    [ImgBin, nCarsDetected, ContCarDetected, IFill] = PreTraitement2(Img, showSteps);
     if ~isempty(nCarsTheoricMin) && ~isempty(nCarsTheoricMax) && (nCarsDetected == nCarsTheoricMax)
-        PostTraitement2(Img, ContCarDetected, 1);
+        PostTraitement2(Img, IFill, ContCarDetected, showSteps);
         validation = 1;
-        %valid = 'VALID';
     else
-        [nCarsDetected, ContCarDetected] = Traitement2(ImgBin, 1);
-        PostTraitement2(Img, ContCarDetected, 1);
+        [nCarsDetected, ContCarDetected, IFill] = Traitement2(ImgBin, showSteps);
+        PostTraitement2(Img, IFill, ContCarDetected, showSteps);
         validation = 1;
-        %valid = 'VALID';
     end
     
     %%Affichage en cours de traitement

@@ -1,6 +1,6 @@
 %% Init
 clear all, clc, close all;
-Img = imread('Images\003.jpg');
+Img = imread('Images\010.jpg');
 %% binarization
 IGray = rgb2gray(Img);
 ICartoon = cartoon(IGray);

@@ -1,4 +1,4 @@
-function [ ImgBin, nbVoit, contoursVoit ] = PreTraitement2( Istart, showSteps )
+function [ ImgBin, nbVoit, contoursVoit, IFill] = PreTraitement2( Istart, showSteps )
 % * Fonction de pre-traitement de l'image
 % * Prend une image uint8 en entrée et renvoie une image binarise
 % * Peut permettre de trouver le nombre de voiture

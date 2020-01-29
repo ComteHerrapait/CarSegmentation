@@ -78,37 +78,30 @@ function btnProcess_Callback(hObject, eventdata, handles)
 % hObject    handle to btnProcess (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+%% Initialization
 name = get(handles.imageName, 'String');%get image name in text field
+if get(handles.boolNoise, 'Value')
+	name = strcat(name , 'b');
+end
 axes(handles.canvas);
 axis off;
-if ~isempty(name) && str2double(name)>= 0 && str2double(name)<= 30
-    %if name is valid
-    path = 'Images/';%chemin vers l'image
-    path = strcat( path, name);%on y ajoute le nom de l'image
-    %si on coche le bouton de bruit on rajoute b au nom
-    if get(handles.boolNoise, 'Value')
-        path = strcat(path , 'b');
-    end
-    %% mise en forme
-    image = imread(strcat( path , '.jpg'));%on ouvre l'image selectionnée
-    imshow(image);%on affiche l'image selectionnée
-    file = fopen(strcat('Images/Annotations/',name,'.annotation.txt'),'r');
-    text = textscan(file,'%s', 'Delimiter', '');
-    set(handles.listBefore, 'String', text{1,1});
-    showStep = get(handles.boolSteps, 'Value');
-    %% Traitement
-    ImgPreTrait = PreTraitement2(image, showStep);
-    ImgTraitement = Traitement(ImgPreTrait, showStep);
-    PostTraitement(ImgTraitement, image);
-    
-    
-else 
-    %if number entered is not valid, displays an error
-    set(handles.listBefore, 'String', 'Error, invalid name entered');
-    set(handles.listAfter, 'String', 'Error, invalid name entered');
-    imshow([1]);%white image
-end
 
+%% Affichage de l'image de base
+path = strcat( 'Images/', name,'.jpg');
+image = imread(path);%on ouvre l'image selectionne
+imshow(image);%on affiche l'image selectionnée
+pause(0.5);
+
+%% Traitement
+showSteps = get(handles.boolSteps, 'Value');
+[validation, nCarsDetected] = ChaineDeTraitement( name , showSteps);
+
+%% Affichage des résultats
+file = fopen(strcat('Images/Annotations/',name,'.annotation.txt'),'r');
+text = textscan(file,'%s', 'Delimiter', '');
+set(handles.listBefore, 'String', text{1,1});
+set(handles.listAfter, 'String', nCarsDetected);
 
 
 

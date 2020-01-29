@@ -1,4 +1,4 @@
-function [ nbVoit, contoursVoit ] = Traitement2( Istart, showSteps )
+function [ nbVoit, contoursVoit, IFill] = Traitement2( Istart, showSteps )
 % * Fonction de traitement de l'image
 % * Prend une image binarise et renvoie le nombre de voiture si le
 % * preTraitement n'est pas suffisant
@@ -31,7 +31,7 @@ for k=1:length(longueur)
         nbVoit = nbVoit + 1;
     end
 end
-
+IFill = IReconstruct3;
 %% 
 if showSteps == 1 % si showSteps == 1, on affiche les différentes étapes
     a = 0.5;
