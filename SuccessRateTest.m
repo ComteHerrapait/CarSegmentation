@@ -1,7 +1,6 @@
 %% Program to test the success rate of the current algorithm on all images
 
 %%  Initialisation
-nTested = 0;
 nValid = 0;
 fprintf('\n%s%s [%s : %s]\t%s voitures %s(%.s)\n\n', 'nom', ' ', 'min', 'max', 'nbcar' ,'VALID' ,'time')
 for b = [" ",'b']
@@ -35,4 +34,4 @@ for b = [" ",'b']
     end
 end
 %% Affichage du résultat
-fprintf('\nTaux de réussite au traitement : %.1f %%\n %.0f bien traitées \n\n',100 * nValid / nTested, nValid);
+fprintf('\nTaux de réussite au traitement : %.1f %%\n %.0f bien traitées \n\n',100 * nValid / 60, nValid);
