@@ -1,9 +1,11 @@
-function [ ImgBin, nbVoit ] = PreTraitement2( Istart, showSteps )
+function [ ImgBin, nbVoit, contoursVoit ] = PreTraitement2( Istart, showSteps )
 % * Fonction de pre-traitement de l'image
-% * Prend une mage uint8 en entrée et renvoie une image binarise
+% * Prend une image uint8 en entrée et renvoie une image binarise
+% * Peut permettre de trouver le nombre de voiture
 
 %% binarization
 IGray = rgb2gray(Istart);
+%IGray = medfilt2(IGray);
 ICartoon = cartoon(IGray);
 IBinary = ICartoon<0.10;
 IBinary = bwareaopen(IBinary,10);%%removes small shapes
@@ -17,17 +19,20 @@ ImgBin = IReconstruct;
 
 Longueur = regionprops(IFill, 'MajorAxisLength');
 med = median([Longueur.MajorAxisLength]);
+
+Contours = regionprops(IFill, 'BoundingBox'); % Contours des objets de l'image
 nbVoit = 0;
+contoursVoit = [];
 for k=1:length(Longueur)
     if (Longueur(k).MajorAxisLength < med*1.5)
+        contoursVoit = [contoursVoit, Contours(k)];
         nbVoit = nbVoit + 1;
     end
 end
 
-nbVoit = nbVoit;
 %% 
 if showSteps == 1 % si showSteps == 1, on affiche les différentes étapes
-    a = 2;
+    a = 0.5;
     imshow(IGray, []);title('niveaux de gris');
     pause(a);
     imshow(ICartoon, []);title('cartoonisation');
